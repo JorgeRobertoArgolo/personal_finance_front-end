@@ -1,36 +1,48 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/.pnp
+# 📦 Dependências
+node_modules/
+.pnp/
 .pnp.js
 
-# testing
-/coverage
+# 📁 Build / Output
+.next/
+out/
+build/
+.turbo/          # Turbopack cache
+.tailwind/       # Tailwind JIT cache
 
-# next.js
-/.next/
-/out/
+# ✅ Tipos e Cache TypeScript
+*.tsbuildinfo
+next-env.d.ts
 
-# production
-/build
+# 🔐 Variáveis de ambiente
+.env
+.env.*
+.env*.local
 
-# misc
-.DS_Store
-*.pem
+# 🧪 Testes e cobertura
+coverage/
 
-# debug
+# 🧠 IDEs e editores
+.vscode/
+.idea/
+
+# 🪵 Logs
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# local env files
-.env*.local
-.env
+# 🛑 Arquivos do sistema
+.DS_Store
+Thumbs.db
 
-# vercel
-.vercel
+# 🔐 Chaves e certificados (se houver)
+*.pem
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# ☁️ Vercel
+.vercel/
+
+# 🔒 Lockfiles — mantenha apenas o que você usa
+package-lock.json  
+# ignore se usar só yarn
+yarn.lock          
+# ignore se usar só npm
