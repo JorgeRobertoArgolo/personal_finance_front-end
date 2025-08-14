@@ -12,6 +12,7 @@ export default function UserPage() {
     )
 }
 
+//Dashboard do usuário autenticado
 export const DashboardUser: React.FC = () => {
     const router = useRouter();
     const [usuario, setUsuario] = 

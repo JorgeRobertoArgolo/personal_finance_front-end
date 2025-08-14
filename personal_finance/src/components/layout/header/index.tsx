@@ -9,6 +9,7 @@ interface HeaderProps {
     logout?: () => void
 }
 
+//Header do usuário autenticado
 export const Header: React.FC<HeaderProps> = ({
     nome,
     email,

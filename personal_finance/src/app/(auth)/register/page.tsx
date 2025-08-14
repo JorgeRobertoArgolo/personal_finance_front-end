@@ -32,6 +32,7 @@ export default function Home() {
   )
 }
 
+//Página de Registro
 export const AuthFormRegister: React.FC = () => {
 
     const usuarioService = useUsuarioService()
