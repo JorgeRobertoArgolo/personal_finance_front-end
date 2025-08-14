@@ -11,6 +11,7 @@ import { Mail, Lock, Wallet, AlertCircle } from "lucide-react"
 import { UsuarioLogin } from '@/feautures/auth/types/usuario-login';
 import Link from "next/link";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { useRouter } from "next/navigation";
 
 //Validações com yup
 const msgCampoObrigatorio: string = "Campo obrigatório"
@@ -30,6 +31,7 @@ export default function Home() {
 
 export const AuthFormLogin: React.FC = () => {
 
+    const router = useRouter();
     const autenticacaoService = useAutenticacaoService()
 
     const formik = useFormik({
@@ -39,6 +41,10 @@ export const AuthFormLogin: React.FC = () => {
         },
         validationSchema: validationSchema,
         onSubmit: async (values) => {
+
+            //Limpa o status de erro anterior
+            formik.setStatus(null);
+
             const usuarioLogin: UsuarioLogin = {
                 email: values.email,
                 senha: values.senha
@@ -46,7 +52,11 @@ export const AuthFormLogin: React.FC = () => {
 
             try {
                 const usuarioLoginResponse = await autenticacaoService.authenticate(usuarioLogin);
+
+                //Guardar os dados no localStorage
+                localStorage.setItem("usuarioLogado", JSON.stringify(usuarioLoginResponse));
                 //Redirecionar ou armazenar token aqui
+                router.push("/user/dashboard");
             } catch (e) {
                 //Obs: o formik já lida com erros de validação, mas aqui pode-se tratar erros de autenticação
                 formik.setStatus( "Credenciais inválidas. Verifique seu email e senha e tente novamente." );
