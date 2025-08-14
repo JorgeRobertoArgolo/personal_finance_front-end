@@ -1,12 +1,10 @@
-import Image from "next/image";
-import { Input } from "./features/auth/components/input";
-import { AuthForm } from "./pages/auth";
+import { AuthForm } from "./(auth)/login/page";
 
 
 export default function Home() {
   return (
     <>
-      <AuthForm />
+        
     </>
   )
 }

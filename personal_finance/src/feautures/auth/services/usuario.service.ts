@@ -1,0 +1,18 @@
+import { AxiosResponse } from "axios"
+import { UsuarioRegister } from "../types/usuario-register"
+import { Usuario } from "../types/usuario"
+import { httpClient } from "@/common/http"
+
+const resourceURL: string = "/api/usuarios"
+
+export const useUsuarioService = () => {
+    const save = async (registerData: UsuarioRegister) : Promise<Usuario> => {
+        const response: AxiosResponse<Usuario> = 
+        await httpClient.post<Usuario>(`${resourceURL}/save`, registerData)
+        return response.data;
+    }
+
+    return {
+        save
+    }
+}
