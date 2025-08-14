@@ -3,6 +3,8 @@
 import { Header } from "@/components/layout/header"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
+import { CardSummary } from "@/components/layout/card-summary";
+import { CalendarIcon, TrendingDown, TrendingUp, Wallet } from "lucide-react";
 
 export default function UserPage() {
     return (
@@ -49,6 +51,28 @@ export const DashboardUser: React.FC = () => {
     return (
         <div className="container mx-auto p-4 space-y-6">
             <Header nome={usuario.nome}email={usuario.email} logout={logout}/>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                {/**
+                 * TODO: balance >= 0 ? "text-green-600" : "text-red-600"
+                 */}
+                <CardSummary title="Saldo Atual" 
+                             icon={<Wallet className="h-4 w-4 text-muted-foreground"/>} 
+                             value="0.00"
+                             />
+
+                <CardSummary title="Receitas" 
+                             icon={<TrendingUp className="h-4 w-4 text-green-600" />}
+                             value="0.00"
+                             />
+                             
+                <CardSummary title="Despesas"
+                             icon={<TrendingDown className="h-4 w-4 text-red-600" />}
+                             value="0.00"
+                             />
+                <CardSummary title="Transações"
+                             icon={<CalendarIcon className="h-4 w-4 text-muted-foreground" />}
+                             value="0.00"/>
+            </div>
         </div>
     )
 }
