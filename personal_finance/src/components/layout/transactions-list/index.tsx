@@ -20,6 +20,9 @@ interface TransactionListProps {
   }
 }
 
+/**
+ *  Lista as transações do usuário autenticado
+ */
 export const TransactionList: React.FC<TransactionListProps> = ({ userId, userEmail, filters }) => {
   const { getTransactionsByAuthenticated, remove, update } = useTransacaoService()
   const [transactions, setTransactions] = useState<Transacao[]>([])

@@ -6,6 +6,7 @@ import { UsuarioRegister } from "../../types/usuario-register"
 
 const resourceURL: string = "/api/auth"
 
+//Funções que fazem requisição a API, nesse caso ao controller de autenticação
 export const useAutenticacaoService = () => {
     const authenticate = async (loginData: UsuarioLogin) : Promise<Usuario> => {
         const response: AxiosResponse<Usuario> = 

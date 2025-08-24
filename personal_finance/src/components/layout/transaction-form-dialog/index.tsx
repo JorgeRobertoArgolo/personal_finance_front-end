@@ -24,6 +24,9 @@ interface TransactionFormDialogProps {
   resetForm: () => void
 }
 
+/**
+ * Formulário para atualização e cadastro de transações
+ */
 export const TransactionFormDialog: React.FC<TransactionFormDialogProps> = ({
   isOpen,
   setIsOpen,

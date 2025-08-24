@@ -6,6 +6,9 @@ interface CardSummaryProps {
     icon: React.ReactNode;
 }
 
+/**
+ * Model para os Cards de resumos da situação
+ */
 export const CardSummary: React.FC<CardSummaryProps> = ({
     title,
     value,

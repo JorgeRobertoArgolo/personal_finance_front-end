@@ -5,6 +5,7 @@ import { httpClient } from "@/common/http"
 
 const resourceURL: string = "/api/usuarios"
 
+//Funções que fazem requisição a API, nesse caso ao controller de usuario
 export const useUsuarioService = () => {
     const save = async (registerData: UsuarioRegister) : Promise<Usuario> => {
         const response: AxiosResponse<Usuario> = 

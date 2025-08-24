@@ -11,6 +11,9 @@ interface FilterProps {
   onChange: (value: string) => void; 
 }
 
+/**
+ * Filtros de busca
+ */
 export const Filter: React.FC<FilterProps> = ({
   title,
   value,
