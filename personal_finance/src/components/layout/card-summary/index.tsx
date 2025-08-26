@@ -8,7 +8,7 @@ interface CardSummaryProps {
 }
 
 /**
- * Model para os Cards de resumos da situação
+ * Componente para os cards de resumo da situação financeira
  */
 export const CardSummary: React.FC<CardSummaryProps> = ({
     title,
@@ -17,15 +17,15 @@ export const CardSummary: React.FC<CardSummaryProps> = ({
     className
 }) => {
     return (
-        <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+        <Card className={className}>
+            <CardHeader className="flex items-center justify-between pb-2">
                 <CardTitle className="text-sm font-medium">
                     {title}
                 </CardTitle>
                 {icon}
             </CardHeader>
             <CardContent>
-                <div className={`text-2x1 font-bold ${className ?? ""}`}>
+                <div className="text-2xl font-bold">
                     {value}
                 </div>
             </CardContent>

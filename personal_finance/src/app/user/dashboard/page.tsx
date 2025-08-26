@@ -11,7 +11,6 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TabsContent } from "@radix-ui/react-tabs";
 import { TransactionList } from "@/components/layout/transactions-list";
 import { useTransacaoService } from "@/feautures/transaction/services/transacao.service";
-import { Transacao } from "@/feautures/transaction/types/transacao";
 
 export default function UserPage() {
     return (
