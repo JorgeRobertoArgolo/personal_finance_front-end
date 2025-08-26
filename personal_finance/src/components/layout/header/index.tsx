@@ -77,7 +77,7 @@ export const Header: React.FC<HeaderProps> = ({
                 />
             </div>   
             <header className="flex items-center justify-between">
-                <h1 className="text-3x1 font-bold">
+                <h1 className="text-3xl font-bold">
                     Gestão Financeira
                 </h1>
                 <div className="flex items-center gap-4">

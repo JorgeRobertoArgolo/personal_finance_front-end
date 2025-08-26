@@ -10,6 +10,8 @@ import { Filter } from "@/components/layout/filter";
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TabsContent } from "@radix-ui/react-tabs";
 import { TransactionList } from "@/components/layout/transactions-list";
+import { useTransacaoService } from "@/feautures/transaction/services/transacao.service";
+import { Transacao } from "@/feautures/transaction/types/transacao";
 
 export default function UserPage() {
     return (
@@ -34,12 +36,17 @@ export const DashboardUser: React.FC = () => {
     income: ["Salário", "Freelance", "Investimentos", "Outros"],
     expense: ["Alimentação", "Transporte", "Moradia", "Saúde", "Educação", "Lazer", "Outros"],
     }
-
     //fim testes
 
     const router = useRouter();
     const [usuario, setUsuario] = 
         useState<{nome: string; email: string; id: string} | null>(null);
+
+    {/**Cálculo para os resumos */}
+    const { getTransactionsByAuthenticated } = useTransacaoService()
+    const [total, setTotal] = useState(0)
+    const [totalDespesas, setTotalDespesas] = useState(0)
+    const [totalReceitas, setTotalReceitas] = useState(0)
 
     useEffect(() => {
         const usuarioLogado = localStorage.getItem("usuarioLogado");
@@ -59,15 +66,43 @@ export const DashboardUser: React.FC = () => {
         }
     }, [router]);
 
+    {/**Cálculo para os resumos */}
+    useEffect(() => {
+        const fetchData = async () => {
+            const data = await getTransactionsByAuthenticated(usuario.id)
+
+            // total de transações
+            setTotal(data.length)
+
+            // total de despesas
+            const despesas = data
+                .filter(t => t.tipo === "DESPESA")
+                .reduce((acc, t) => acc + t.valor, 0)
+                setTotalDespesas(despesas)
+
+            // total de receitas
+            const receitas = data
+                .filter(t => t.tipo === "RECEITA")
+                .reduce((acc, t) => acc + t.valor, 0)
+                setTotalReceitas(receitas)
+        }
+
+        fetchData()
+    }, [usuario?.id, getTransactionsByAuthenticated])
+
     if (!usuario) {
-        //TODO: Colocar um loading spinner aqui
-        return null; 
+        return (
+            <div className="flex items-center justify-center h-screen">
+            <span>Carregando...</span>
+            </div>
+        )
     }
 
     const logout = () => {
         localStorage.removeItem("usuarioLogado");
         router.push("/login");
     }
+
 
     return (
         <div className="container mx-auto p-4 space-y-6">
@@ -79,22 +114,26 @@ export const DashboardUser: React.FC = () => {
                  * TODO: balance >= 0 ? "text-green-600" : "text-red-600"
                  */}
                 <CardSummary title="Saldo Atual" 
-                             icon={<Wallet className="h-4 w-4 text-muted-foreground"/>} 
-                             value="0.00"
+                             icon={<Wallet className="h-4 w-4 text-muted-foreground"/>}
+                             className={(totalReceitas - totalDespesas) >= 0 ? "text-green-600" : "text-red-600"} 
+                             value={'R$ ' + (totalReceitas - totalDespesas).toString()}
                              />
 
                 <CardSummary title="Receitas" 
                              icon={<TrendingUp className="h-4 w-4 text-green-600" />}
-                             value="0.00"
+                             className="text-green-600" 
+                             value={'R$ ' + totalReceitas.toString()}
                              />
                              
                 <CardSummary title="Despesas"
                              icon={<TrendingDown className="h-4 w-4 text-red-600" />}
-                             value="0.00"
+                             className="text-red-600" 
+                             value={'R$ ' + totalDespesas.toString()}
                              />
                 <CardSummary title="Transações"
                              icon={<CalendarIcon className="h-4 w-4 text-muted-foreground" />}
-                             value="0.00"/>
+                             value={total.toString()}
+                             />
             </div>
 
             <Card>

@@ -4,6 +4,7 @@ interface CardSummaryProps {
     title: string;
     value: string;
     icon: React.ReactNode;
+    className?: string;
 }
 
 /**
@@ -12,7 +13,8 @@ interface CardSummaryProps {
 export const CardSummary: React.FC<CardSummaryProps> = ({
     title,
     value,
-    icon
+    icon,
+    className
 }) => {
     return (
         <Card>
@@ -23,7 +25,7 @@ export const CardSummary: React.FC<CardSummaryProps> = ({
                 {icon}
             </CardHeader>
             <CardContent>
-                <div className="text-2x1 font-bold">
+                <div className={`text-2x1 font-bold ${className ?? ""}`}>
                     {value}
                 </div>
             </CardContent>
