@@ -38,12 +38,6 @@ export const TransactionFormDialog: React.FC<TransactionFormDialogProps> = ({
 }) => {
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <Button onClick={resetForm}>
-          <Plus className="w-4 h-4 mr-2" />
-          {editingTransaction ? "Editar Lançamento" : "Novo Lançamento"}
-        </Button>
-      </DialogTrigger>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{editingTransaction ? "Editar Lançamento" : "Novo Lançamento"}</DialogTitle>
