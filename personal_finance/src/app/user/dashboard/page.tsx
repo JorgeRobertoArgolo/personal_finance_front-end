@@ -71,7 +71,7 @@ export const DashboardUser: React.FC = () => {
 
     return (
         <div className="container mx-auto p-4 space-y-6">
-            <Header nome={usuario.nome}email={usuario.email} logout={logout}/>
+            <Header nome={usuario.nome}email={usuario.email} logout={logout} userEmail={usuario.email} />
 
             {/**Resumo da situação financeira */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
