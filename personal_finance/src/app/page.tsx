@@ -2,11 +2,12 @@
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
 import { Wallet, TrendingUp, PieChart, Shield, Smartphone, BarChart3, Target, Clock, Users, Star, ArrowRight, CheckCircle } from 'lucide-react'
 import { useRouter } from "next/navigation"
 
-
+/**
+ * Tela inicial, a apresentação do projeto
+ */
 export default function Home() {
   const router = useRouter()
 

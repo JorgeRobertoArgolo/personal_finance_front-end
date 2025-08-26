@@ -13,6 +13,7 @@ interface FilterProps {
 
 /**
  * Filtros de busca
+ * Removido do código por enquanto
  */
 export const Filter: React.FC<FilterProps> = ({
   title,

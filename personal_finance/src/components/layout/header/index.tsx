@@ -3,7 +3,7 @@
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { DropdownMenuContent, DropdownMenu, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { LogOut, Plus } from "lucide-react";
+import { LogOut, Plus, User } from "lucide-react";
 import { TransactionFormDialog } from "../transaction-form-dialog";
 import { useTransacaoService } from "@/feautures/transaction/services/transacao.service";
 import { useState } from "react";
@@ -89,18 +89,18 @@ export const Header: React.FC<HeaderProps> = ({
                             <Button variant="ghost" className="relative h-10 w-10 rounded-full">
                                 <Avatar className="bg-gray-200 rounded-full">
                                     <AvatarFallback>
-                                        {nome?.split(" ")[0].charAt(0).toUpperCase()}
+                                        {<User />}
                                     </AvatarFallback>
                                 </Avatar>
                             </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="w-56" align="end" forceMount>
-                            <DropdownMenuLabel className="font-normal">
-                                <div className="flex flex-col space-y-1">
-                                    <p className="text-sm font-medium leading-none">
+                            <DropdownMenuLabel className="font-normal bg-white">
+                                <div className="flex flex-col space-y-1 bg-white">
+                                    <p className="text-sm font-medium leading-none bg-white">
                                         {nome}
                                     </p>
-                                    <p className="text-xs text-muted-foreground">
+                                    <p className="text-xs text-muted-foreground bg-white">
                                         {email}
                                     </p>
                                 </div>

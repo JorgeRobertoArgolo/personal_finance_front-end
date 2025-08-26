@@ -13,17 +13,12 @@ import { TransactionFormDialog } from "../transaction-form-dialog"
 interface TransactionListProps {
   userId: string
   userEmail: string
-  filters: {
-    month?: string
-    type?: string
-    category?: string
-  }
 }
 
 /**
  *  Lista as transações do usuário autenticado
  */
-export const TransactionList: React.FC<TransactionListProps> = ({ userId, userEmail, filters }) => {
+export const TransactionList: React.FC<TransactionListProps> = ({ userId, userEmail }) => {
   const { getTransactionsByAuthenticated, remove, update } = useTransacaoService()
   const [transactions, setTransactions] = useState<Transacao[]>([])
   const [loading, setLoading] = useState(true)
@@ -48,12 +43,9 @@ export const TransactionList: React.FC<TransactionListProps> = ({ userId, userEm
 
   const filteredTransactions = useMemo(() => {
     return transactions.filter((transaction) => {
-      if (filters.month && transaction.data.substring(0, 7) !== filters.month) return false
-      if (filters.type && transaction.tipo !== filters.type) return false
-      if (filters.category && transaction.categoria?.nome !== filters.category) return false
       return true
     })
-  }, [transactions, filters])
+  }, [transactions])
 
   if (loading) {
     return <p>Carregando transações...</p>
@@ -63,12 +55,15 @@ export const TransactionList: React.FC<TransactionListProps> = ({ userId, userEm
     return <p>Nenhuma transação encontrada</p>
   }
 
+   /*
+   * Deleta a Transação, manda a requisição para o backend ao chamar o service 
+   */
   const onDelete = async (id: string) => {
     if (!id) return
 
     try {
       await remove(id)
-      setTransactions((prev) => prev.filter((t) => t.id !== id))
+      setTransactions((prev) => prev.filter((t) => t.id.toString() !== id.toString()))
     } catch (error) {
       console.error("Erro ao deletar transação:", error)
     }
@@ -97,12 +92,15 @@ export const TransactionList: React.FC<TransactionListProps> = ({ userId, userEm
     })
   }
 
+   /*
+   * Edição ou salvar nova Transação, manda a requisição para o backend ao chamar o service 
+   */
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!editingTransaction) return 
 
       try {
-          const updatedTransaction = await update(editingTransaction.id, {
+          const updatedTransaction = await update((editingTransaction.id).toString(), {
           ...editingTransaction,
           descricao: formData.descricao,
           valor: formData.valor,
@@ -185,7 +183,7 @@ export const TransactionList: React.FC<TransactionListProps> = ({ userId, userEm
                             size="icon"
                             onClick={() => {
                                 if (transaction.id) {
-                                onDelete(transaction.id)
+                                onDelete((transaction.id).toString())
                                 }
                             }}
                             >

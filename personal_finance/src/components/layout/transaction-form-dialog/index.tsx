@@ -53,7 +53,7 @@ export const TransactionFormDialog: React.FC<TransactionFormDialogProps> = ({
             <Input
               id="descricao"
               value={formData.descricao}
-              onChange={(e) => setFormData(prev => ({ ...prev, descricao: e.target.value }))}
+              onChange={(e) => setFormData((prev: any) => ({ ...prev, descricao: e.target.value }))}
               required
             />
           </div>
@@ -64,7 +64,7 @@ export const TransactionFormDialog: React.FC<TransactionFormDialogProps> = ({
               type="number"
               step="0.01"
               value={formData.valor}
-              onChange={(e) => setFormData(prev => ({ ...prev, valor: Number(e.target.value) }))}
+              onChange={(e) => setFormData((prev: any) => ({ ...prev, valor: Number(e.target.value) }))}
               required
             />
           </div>
@@ -73,7 +73,7 @@ export const TransactionFormDialog: React.FC<TransactionFormDialogProps> = ({
             <Select
               value={formData.tipo}
               onValueChange={(value: "RECEITA" | "DESPESA") =>
-                setFormData(prev => ({ ...prev, tipo: value, categoria: "" }))
+                setFormData((prev: any) => ({ ...prev, tipo: value, categoria: "" }))
               }
             >
               <SelectTrigger>
@@ -90,7 +90,7 @@ export const TransactionFormDialog: React.FC<TransactionFormDialogProps> = ({
             <Input
               id="categoria"
               value={formData.categoria}
-              onChange={(e) => setFormData(prev => ({ ...prev, categoria: e.target.value }))}
+              onChange={(e) => setFormData((prev: any) => ({ ...prev, categoria: e.target.value }))}
               required
             />
           </div>
@@ -100,7 +100,7 @@ export const TransactionFormDialog: React.FC<TransactionFormDialogProps> = ({
               id="data"
               type="date"
               value={formData.data}
-              onChange={(e) => setFormData(prev => ({ ...prev, data: e.target.value }))}
+              onChange={(e) => setFormData((prev: any) => ({ ...prev, data: e.target.value }))}
               required
             />
           </div>
