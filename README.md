@@ -6,48 +6,32 @@ Exemplo de como será a estrutura do projeto
 ```text
 my-app/
 │
-├── public/                     # Arquivos públicos (imagens, favicon, robots.txt etc.)
+├── public/                    # Arquivos públicos (imagens, favicon, robots.txt etc.)
 │
-├── src/                        # Todo o código-fonte da aplicação
-│   ├── app/                    # Rotas (App Router) e layout principal
+├── src/                       # Todo o código-fonte da aplicação
+│   ├── app/                   # Rotas (App Router) e layout principal
 │   │   ├── layout.tsx         # Layout global da aplicação
 │   │   ├── page.tsx           # Página inicial ("/")
-│   │   ├── about/             # Rota: /about
-│   │   │   └── page.tsx
-│   │   └── dashboard/         # Rota: /dashboard
-│   │       ├── layout.tsx     # Layout da seção dashboard
-│   │       └── page.tsx
-│   │
+│   │   ├── global.css         # CSS global da aplicação   
+│   │   └── feautures/         # Feautures (telas)
+|   |
 │   ├── components/            # Componentes reutilizáveis
 │   │   ├── ui/                # Componentes visuais (botões, cards, modais, etc.)
-│   │   ├── layout/            # Cabeçalhos, rodapés, barras laterais
-│   │   └── shared/            # Outros componentes compartilhados
+│   │   └── layout/            # Cabeçalhos, rodapés, barras laterais (layouts de partes da aplicação)
 │   │
-│   ├── features/              # Funcionalidades isoladas (como "auth", "tasks", etc.)
-│   │   ├── auth/
-│   │   │   ├── components/
-│   │   │   ├── services/
-│   │   │   ├── types.ts
-│   │   │   └── utils.ts
-│   │   └── tasks/
-│   │       ├── components/
-│   │       ├── services/
-│   │       └── types.ts
+│   ├── common/                # Funcionalidades comuns
+│   │   └── http/              # Caminho da API
+│   │
+│   ├── components/            # 
+│   │   ├── layout/            # Componentes criados por mim
+│   │   └── ui                 # Componentes prontos      
+│   │   
+│   ├── feautures/             # Feautures do projeto
+│   │   ├── services/          # Services que fazem a conexão com a API
+│   │   └── types              # Equivalente as classes, só que apenas os atributos
 │   │
 │   ├── lib/                   # Funções utilitárias e bibliotecas auxiliares
-│   │   ├── firebase/          # Firebase config e inicialização
-│   │   └── supabase/          # Supabase client (se usar)
 │   │
-│   ├── hooks/                 # React hooks customizados
 │   ├── styles/                # Arquivos CSS / Tailwind / variáveis globais
-│   ├── constants/             # Constantes globais (URLs, mensagens, tokens)
-│   ├── types/                 # Tipagens globais (interfaces, enums, etc.)
-│   └── utils/                 # Funções utilitárias genéricas (formatadores, validadores)
-│
-├── .env.local                 # Variáveis de ambiente (não versionadas)
-├── .gitignore
-├── next.config.js
-├── tailwind.config.js
-├── tsconfig.json
-└── package.json
+│   └── constants/             # Constantes globais 
 ```
