@@ -7,7 +7,7 @@ const resourceURL: string = "/api/transacao"
 //Funções que fazem requisição a API, nesse caso ao controller de transação
 export const useTransacaoService = () => {
     const save = async (transacao: Transacao) : Promise<Transacao> => {
-        const response: AxiosResponse<Transacao> = await httpClient.post<Transacao>(`${resourceURL}/save`)
+        const response: AxiosResponse<Transacao> = await httpClient.post<Transacao>(`${resourceURL}/save`, transacao)
         return response.data
     }
 
