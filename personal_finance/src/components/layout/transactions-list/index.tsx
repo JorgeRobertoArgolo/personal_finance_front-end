@@ -98,29 +98,30 @@ export const TransactionList: React.FC<TransactionListProps> = ({ userId, userEm
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
-  e.preventDefault()
-  if (!editingTransaction) return 
+    e.preventDefault()
+    if (!editingTransaction) return 
 
-    try {
-        const updatedTransaction = await update(editingTransaction.id, {
-        ...editingTransaction,
-        descricao: formData.descricao,
-        valor: formData.valor,
-        tipo: formData.tipo,
-        categoria: { nome: formData.categoria },
-        data: formData.data,
-        emailUsuario: userEmail
-        })
+      try {
+          const updatedTransaction = await update(editingTransaction.id, {
+          ...editingTransaction,
+          descricao: formData.descricao,
+          valor: formData.valor,
+          tipo: formData.tipo,
+          categoria: { nome: formData.categoria },
+          data: formData.data,
+          emailUsuario: userEmail
+          })
 
-        setTransactions(prev =>
-        prev.map(t => (t.id === updatedTransaction.id ? updatedTransaction : t))
-        )
-    } catch (error) {
-        console.error("Erro ao atualizar transação:", error)
-    } finally {
-        setIsDialogOpen(false)
-        resetForm()
-    }}
+          setTransactions(prev =>
+          prev.map(t => (t.id === updatedTransaction.id ? updatedTransaction : t))
+          )
+      } catch (error) {
+          console.error("Erro ao atualizar transação:", error)
+      } finally {
+          setIsDialogOpen(false)
+          resetForm()
+      }
+  }
 
 
   return (
