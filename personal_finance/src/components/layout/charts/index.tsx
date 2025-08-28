@@ -8,7 +8,7 @@ interface ChartsProps {
 
 const COLORS = ["#10b981", "#ef4444", "#3b82f6", "#facc15", "#8b5cf6"];
 
-
+//Gráficos
 export const Charts: React.FC<ChartsProps> = ({
   transactions
 }) => {
@@ -41,7 +41,7 @@ export const Charts: React.FC<ChartsProps> = ({
 
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            {/* PieChart */}
+            {/* PieChart (Pizza) */}
             <Card>
               <CardHeader>
                 <CardTitle>Despesas por Categoria</CardTitle>
@@ -69,7 +69,7 @@ export const Charts: React.FC<ChartsProps> = ({
               </CardContent>
             </Card>
 
-            {/* LineChart */}
+            {/* LineChart(Linha) */}
             <Card>
               <CardHeader>
                 <CardTitle>Evolução do Saldo</CardTitle>
