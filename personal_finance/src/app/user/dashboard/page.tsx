@@ -12,6 +12,7 @@ import { useTransacaoService } from "@/feautures/transaction/services/transacao.
 import { Loader } from "@/components/layout/loader";
 import { Charts } from "@/components/layout/charts";
 import { Transacao } from "@/feautures/transaction/types/transacao";
+import { UsersList } from "@/components/layout/users-list";
 
 export default function UserPage() {
     return (
@@ -26,7 +27,7 @@ export const DashboardUser: React.FC = () => {
 
     const router = useRouter();
     const [usuario, setUsuario] = 
-        useState<{nome: string; email: string; id: string} | null>(null);
+        useState<{nome: string; email: string; id: string, perfil: string} | null>(null);
 
     {/**Cálculo para os resumos */}
     const { getTransactionsByAuthenticated } = useTransacaoService()
@@ -135,6 +136,10 @@ export const DashboardUser: React.FC = () => {
                     <TabsTrigger value="charts">
                         Gráficos
                     </TabsTrigger>
+                    {
+                        (usuario.perfil === "ADMIN") &&
+                        <TabsTrigger value="users">Usuários</TabsTrigger>
+                    }
                 </TabsList>
                 <TabsContent value="transactions">
                     <TransactionList userId={usuario.id} userEmail={usuario.email} />
@@ -142,6 +147,12 @@ export const DashboardUser: React.FC = () => {
                 <TabsContent value="charts">
                     <Charts transactions={transactions}/>
                 </TabsContent>
+                {
+                    (usuario.perfil === "ADMIN") &&
+                    <TabsContent value="users">
+                        <UsersList />
+                    </TabsContent>
+                }
             </Tabs>
         </div>
     )

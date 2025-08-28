@@ -13,7 +13,15 @@ export const useUsuarioService = () => {
         return response.data;
     }
 
+    const findall = async (): Promise<Usuario[]> => {
+            const response: AxiosResponse<Usuario[]> = await httpClient.get<Usuario[]>(
+                `${resourceURL}/findall`
+            )
+            return response.data
+        }
+
     return {
-        save
+        save, 
+        findall
     }
 }

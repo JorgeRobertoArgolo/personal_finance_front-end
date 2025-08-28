@@ -57,8 +57,9 @@ export const AuthFormLogin: React.FC = () => {
                 //Guardar os dados no localStorage
                 localStorage.setItem("usuarioLogado", JSON.stringify({
                     id: usuarioLoginResponse.id,
-                    nome: usuarioLoginResponse.nome,
-                    email: usuarioLoginResponse.email
+                    nome: usuarioLoginResponse.pessoa?.nome,
+                    email: usuarioLoginResponse.email,
+                    perfil: usuarioLoginResponse.perfil?.acesso
                 }))
                 //Redirecionar ou armazenar token aqui
                 router.push("/user/dashboard");
