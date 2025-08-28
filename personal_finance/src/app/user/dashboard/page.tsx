@@ -10,6 +10,8 @@ import { TabsContent } from "@radix-ui/react-tabs";
 import { TransactionList } from "@/components/layout/transactions-list";
 import { useTransacaoService } from "@/feautures/transaction/services/transacao.service";
 import { Loader } from "@/components/layout/loader";
+import { Charts } from "@/components/layout/charts";
+import { Transacao } from "@/feautures/transaction/types/transacao";
 
 export default function UserPage() {
     return (
@@ -31,6 +33,7 @@ export const DashboardUser: React.FC = () => {
     const [total, setTotal] = useState(0)
     const [totalDespesas, setTotalDespesas] = useState(0)
     const [totalReceitas, setTotalReceitas] = useState(0)
+    const [transactions, setTransactions] = useState<Transacao[]>([]);
 
     useEffect(() => {
         const usuarioLogado = localStorage.getItem("usuarioLogado");
@@ -62,17 +65,20 @@ export const DashboardUser: React.FC = () => {
             const despesas = data
                 .filter(t => t.tipo === "DESPESA")
                 .reduce((acc, t) => acc + t.valor, 0)
-                setTotalDespesas(despesas)
+            setTotalDespesas(Number(despesas.toFixed(2)))
 
             // total de receitas
             const receitas = data
                 .filter(t => t.tipo === "RECEITA")
                 .reduce((acc, t) => acc + t.valor, 0)
-                setTotalReceitas(receitas)
+            setTotalReceitas(Number(receitas.toFixed(2)))
+
+            //Salva as transações
+            setTransactions(data)
         }
 
         fetchData()
-    }, [usuario?.id, getTransactionsByAuthenticated])
+    }, [usuario?.id])
 
     //Loader (Carregando)
     if (!usuario) {
@@ -84,7 +90,7 @@ export const DashboardUser: React.FC = () => {
     //Sair da conta
     const logout = () => {
         localStorage.removeItem("usuarioLogado");
-        router.push("/login");
+        router.push("/");
     }
 
 
@@ -97,7 +103,7 @@ export const DashboardUser: React.FC = () => {
                 <CardSummary title="Saldo Atual" 
                              icon={<Wallet className="h-4 w-4 text-muted-foreground"/>}
                              className={(totalReceitas - totalDespesas) >= 0 ? "text-green-600" : "text-red-600"} 
-                             value={'R$ ' + (totalReceitas - totalDespesas).toString()}
+                            value={'R$ ' + (totalReceitas - totalDespesas).toFixed(2)}
                              />
 
                 <CardSummary title="Receitas" 
@@ -132,6 +138,9 @@ export const DashboardUser: React.FC = () => {
                 </TabsList>
                 <TabsContent value="transactions">
                     <TransactionList userId={usuario.id} userEmail={usuario.email} />
+                </TabsContent>
+                <TabsContent value="charts">
+                    <Charts transactions={transactions}/>
                 </TabsContent>
             </Tabs>
         </div>
